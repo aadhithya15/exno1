@@ -1,139 +1,224 @@
-# Exno:1
-Data Cleaning Process
+# Ex. 1   Data Cleaning and Outlier Detection & Removal</h1>
 
-# AIM
-To read the given data and perform data cleaning and save the cleaned data to a file.
 
-# Explanation
-Data cleaning is the process of preparing data for analysis by removing or modifying data that is incorrect ,incompleted , irrelevant , duplicated or improperly formatted. Data cleaning is not simply about erasing data ,but rather finding a way to maximize datasets accuracy without necessarily deleting the information.
+## AIM
+### To read the given data and perform data cleaning and save the cleaned data to a file.
 
-# Algorithm
-STEP 1: Read the given Data
+## Explanation
+### Data cleaning is the process of preparing data for analysis by removing or modifying data that is incorrect ,incompleted , irrelevant , duplicated or improperly formatted. Data cleaning is not simply about erasing data ,but rather finding a way to maximize datasets accuracy without necessarily deleting the information.
 
-STEP 2: Get the information about the data
+## Algorithm
+### STEP 1
+#### Read the given Data
 
-STEP 3: Remove the null values from the data
+### STEP 2
+#### Get the information about the data
 
-STEP 4: Save the Clean data to the file
+### STEP 3 
+#### Remove the null values from the data
 
-STEP 5: Remove outliers using IQR
+### STEP 4
+#### Save the Clean data to the file
 
-STEP 6: Use zscore of to remove outliers
+### STEP 5
+#### Remove outliers using IQR
 
-# Coding and Output
+### STEP 6
+#### Use zscore of to remove outliers
 
+## Coding and Outputs
+
+### Name : AADHITHYA.M
+### Reg No: 212222100001
+
+```py
 import pandas as pd
-df=pd.read_csv("/content/SAMPLEIDS.csv")
+import numpy as np
+import seaborn as sns
+import os 
+df=pd.read_csv("SAMPLEIDS.csv")
 df
+```
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/ed03bbd1-7c97-4cd8-8cf0-3f5f9e14dcc8)
 
-![output 1](https://github.com/chgeethika/ex-no1/assets/142209368/cc27d6cf-05b5-4b55-9c0a-2c03001688f9)
-
-print(df.head(7))
-
-![o 3](https://github.com/chgeethika/ex-no1/assets/142209368/ad269980-fb09-4705-991a-7076f0b28700)
-
-print(df.tail(2))
-
-![o4](https://github.com/chgeethika/ex-no1/assets/142209368/99c1ad9e-d98c-44a3-96a5-61a8622d6178)
-
-df.info()
-
-![o5](https://github.com/chgeethika/ex-no1/assets/142209368/811fbadb-3961-4c7d-b945-60ef2d52005c)
-
-print(df.describe())
-
-![o6](https://github.com/chgeethika/ex-no1/assets/142209368/0c207343-ef54-4b43-b547-1a5af544a062)
-
+```py
 df.isnull().sum()
 
-![o7](https://github.com/chgeethika/ex-no1/assets/142209368/87c68baa-7624-4e1a-971a-80c83eb61d90)
+```
 
-df.nunique()
-
-![o8](https://github.com/chgeethika/ex-no1/assets/142209368/9d9493c9-6e0b-4ee6-89be-17cbd2e5e56d)
-
-mn=df.TOTAL.mean()
-mn
-
-![mn](https://github.com/chgeethika/ex-no1/assets/142209368/37a126cd-8ea9-4c65-af75-2697bddd6a35)
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/57d42b69-bd5e-4c22-b8e8-6f2ae3f0404a)
 
 
-df.TOTAL.fillna(mn,inplace=True)
-df
 
-![o9](https://github.com/chgeethika/ex-no1/assets/142209368/52bc6f65-7e58-4246-b74d-aaab99b4fb0d)
+```py
+df.isnull().any()
+```
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/918f392c-8185-4d11-94f3-63785887574c)
 
-min=df.M4.min()
-min
+```py
+df.dropna()
+```
 
-![min](https://github.com/chgeethika/ex-no1/assets/142209368/3571db1b-b18c-439e-814b-4ecc847615c4)
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/38354c0d-60a4-4c93-a25d-4302bad7ac62)
 
-df.M4.fillna(min,inplace=True)
-df
+```py
+df.fillna(0)
+```
 
-![o10](https://github.com/chgeethika/ex-no1/assets/142209368/193b4f4d-cb59-4493-bafe-2c3aebb9c503)
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/2b8ac0df-d0c1-46e1-87a4-ff8f930ff3d7)
 
-![o10](https://github.com/chgeethika/ex-no1/assets/142209368/5a0746c8-ed4d-4dc3-a67f-c6e9656ce551)
+```py
+df.fillna(method = 'ffill')
+```
 
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/87b27264-923b-4b0d-904f-106894f0fbcd)
+
+```py
+
+df.fillna(method = 'bfill')
+```
+
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/9a0df734-21b5-4b1e-baf0-2c87c82fafd7)
+
+```py
+df_dropped = df.dropna()
+df_dropped
+```
+
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/e7881fae-d374-4f76-bac8-481821e6461e)
+
+```py
+df.fillna({'GENDER':'FEMALE','NAME':'PRIYU','ADDRESS':'POONAMALEE','M1':98,'M2':87,'M3':76,'M4':92,'TOTAL':305,'AVG':89.999999})
+```
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/71c04f95-74c9-4971-aff9-f21a3accb70a)
+
+
+<hr><hr>
+
+
+```py
 import pandas as pd
+```
+
+```py
+ir=pd.read_csv('iris.csv')
+ir
+```
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/32840cf3-736d-4c4b-bc8e-2d55ee7e1417)
+
+```py
+ir.describe()
+```
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/e0ce99a8-f7b9-4ccd-9ac8-df82b53f4bc6)
+
+```py
 import seaborn as sns
-age=[1,3,28,27,25,92,30,39,40,50,26,24,29,94]
-af=pd.DataFrame(age)
-af
+```
 
-![o12](https://github.com/chgeethika/ex-no1/assets/142209368/35531f01-5402-4cc1-991f-a07e62dacf48)
+```py
 
-sns.boxplot(data=af)
-
-![o13](https://github.com/chgeethika/ex-no1/assets/142209368/32e94065-fd93-4f9e-93ec-5f3894e955b4)
+sns.boxplot(x='sepal_width',data=ir)
+```
 
 
-sns.scatterplot(data=af)
-
-![o14](https://github.com/chgeethika/ex-no1/assets/142209368/3d0adb77-0703-44c3-9261-f74cb1f0b920)
-
-q1=af.quantile(0.25)
-q2=af.quantile(0.50)
-q3=af.quantile(0.75)
-iqr=q3-q1
-iqr
-low=q1-1.5*iqr
-low
-high=q3+1.5*iqr
-high
-
-![o15](https://github.com/chgeethika/ex-no1/assets/142209368/225a452e-83d4-4210-8748-e8add5b925e1)
-
-af=af[((af>=low)&(af<=high))]
-af
-
-![o16](https://github.com/chgeethika/ex-no1/assets/142209368/49056f63-9937-4109-a285-8c4388441f46)
-
-af.dropna()
-
-![o17](https://github.com/chgeethika/ex-no1/assets/142209368/466a854d-4b2f-43c8-85f8-ac94ad6e38d5)
-
-sns.boxplot(data=af)
-
-![o18](https://github.com/chgeethika/ex-no1/assets/142209368/7b62062c-59cc-4789-bbcf-5e4fd63c0b53)
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/1c9bfcae-a2b3-4573-b204-c2590c8bc9a6)
 
 
-sns.scatterplot(data=af)
+```py
+c1=ir.sepal_width.quantile(0.25)
+c3=ir.sepal_width.quantile(0.75)
+iq=c3-c1
+print(c3)
+```
 
-![o19](https://github.com/chgeethika/ex-no1/assets/142209368/d294460b-cd0a-4f8e-8ea7-495169adb75c)
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/05ef4457-91f5-4a19-b413-1d4eea93b0a7)
 
-data=[1,12,15,18,21,24,27,30,33,36,39,42,45,48,51,54,57,60,63,66,69,72,75,78,81,84,87,90,93,96,99,102,105]
-df=pd.DataFrame(data)
-df
+```py
 
-![o20](https://github.com/chgeethika/ex-no1/assets/142209368/bff14676-97ae-4ebd-9897-89d9e8a3bc87)
+rid=ir[((ir.sepal_width<(c1-1.5*iq))|(ir.sepal_width>(c3+1.5*iq)))]
+rid['sepal_width']
+```
 
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/c554ef7e-012c-40f6-8b82-dbe4ae9a20b3)
+
+```py
+delid=ir[~((ir.sepal_width<(c1-1.5*iq))|(ir.sepal_width>(c3+1.5*iq)))]
+delid
+```
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/0a32cc24-1970-41a2-acf7-cb58a6955c01)
+
+```py
+sns.boxplot(x='sepal_width',data=delid)
+```
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/19664bc6-f558-48f3-b449-fa6652c4e7ed)
+
+<hr><hr>
+
+
+```py
+import matplotlib.pyplot as plt
+import pandas as pd
 import numpy as np
-from scipy import stats
-z=np.abs(stats.zscore(df))
+import scipy.stats as stats
+```
+```py
+dataset=pd.read_csv("heights.csv")
+dataset
+```
+
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/080b6095-73da-4bee-a763-08c7a0b81a07)
+
+```py
+df = pd.read_csv("heights.csv")
+q1 = df['height'].quantile(0.25)
+q2 = df['height'].quantile(0.5)
+q3 = df['height'].quantile(0.75)
+```
+
+```py
+iqr = q3-q1
+iqr
+```
+
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/ffb0b515-5964-4405-9e0b-6d2c986c3308)
+
+
+```py
+low = q1 - 1.5*iqr
+low
+```
+
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/b68f4b97-1246-4747-9aff-06e058c94f44)
+
+```py
+high = q3 + 1.5*iqr
+high
+```
+
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/da8aa517-c1de-4e43-91d6-ec677f8beaa5)
+
+
+```py
+df1 = df[((df['height'] >=low)& (df['height'] <=high))]
+df1
+```
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/5444510b-6eb1-4fdd-a65f-02c85bd685d4)
+
+
+```py
+z = np.abs(stats.zscore(df['height']))
 z
+```
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/02efcb16-a37a-4313-8111-7396dbd21f2e)
 
-![o22](https://github.com/chgeethika/ex-no1/assets/142209368/9a5242a4-f1c6-4ffa-96b1-fa68c0aa81ab)
+```py
+df1 = df[z<3]
+df1
+```
 
-# Result
-Thus the given program executed successfully.
+![image](https://github.com/PSriVarshan/exno1/assets/114944059/fbfd480f-960d-4d51-8695-71718cc8a342)
+
+<hr>
+
+## Result
+Hence the data was cleaned , outliers were detected and removed.
